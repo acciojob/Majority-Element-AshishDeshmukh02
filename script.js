@@ -5,22 +5,19 @@ const readline = require('readline').createInterface({
 });
 
 function majorityElement(nums) {
-    let map = new Map();
-    let n = nums.length;
-    
-    for (let i = 0; i < n; i++) {
-        if (!map.has(nums[i])) {
-            map.set(nums[i], 1);
-        } else {
-            let count = map.get(nums[i]);
-            count++;
-            if (count > Math.floor(n/2)) {
-                return nums[i];
-            }
-            map.set(nums[i], count);
-        }
+  let map = {};
+  for (let i = 0; i < nums.length; i++) {
+    if (map[nums[i]]) {
+      map[nums[i]]++;
+    } else {
+      map[nums[i]] = 1;
     }
+    if (map[nums[i]] > Math.floor(nums.length / 2)) {
+      return nums[i];
+    }
+  }
 }
+
 
 
 readline.question(`Enter a list of comma-separated numbers: `, (input) => {
